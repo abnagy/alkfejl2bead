@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '../transaction';
+import { TransactionService } from '../transaction.service';
+
 
 @Component({
   selector: 'transaction-list',
@@ -13,7 +15,6 @@ export class TransactionListComponent implements OnInit {
       id: 1,
       title: 'Lidl bevásárlás',
       created_at: '2018-11-11',
-      user :'én',
       message: 'Valami leírás',
       type: ['bevasarlas', 'elemiszer'],
       updated_at: '2018-11-11',
@@ -23,7 +24,7 @@ export class TransactionListComponent implements OnInit {
       id: 2,
       title: 'Auchan',
       created_at: '2018-11-11',
-      user :'apa',
+    
       message: 'Valami leírás',
       type: ['bevasarlas', 'elemiszer'],
       updated_at: '2018-11-11',
@@ -33,7 +34,7 @@ export class TransactionListComponent implements OnInit {
       id: 3,
       title: 'hentes',
       created_at: '2018-11-11',
-      user :'pityu',
+      
       message: 'Valami leírás',
       type: ['elelmiszer'],
       updated_at: '2018-11-11',
@@ -43,7 +44,6 @@ export class TransactionListComponent implements OnInit {
       id: 4,
       title: 'fogorvos',
       created_at: '2018-11-11',
-      user :'én',
       message: 'Valami leírás',
       type: ['egeszseg'],
       updated_at: '2018-11-11',
@@ -64,9 +64,12 @@ export class TransactionListComponent implements OnInit {
   selectedType = '';
   selectedTransaction = null;
 
-  constructor() { }
+  constructor(
+    private transactionService: TransactionService
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.transactions = await this.transactionService.getTransactions();
     this.filterTransactions();
   }
 
@@ -79,6 +82,11 @@ export class TransactionListComponent implements OnInit {
   onFilterChange(data) {
     this.selectedType = data;
     this.filterTransactions();
+  }
+
+  onFormSave(transaction: Transaction) {
+    this.selectedTransaction = transaction;
+    this.selectedTransaction = null;
   }
 
 }

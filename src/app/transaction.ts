@@ -1,10 +1,9 @@
 export class Transaction {
     id = null
     title = ''
-    user = ''
+    type = []
     created_at = ''
     message = ''
-    type = []
     updated_at = ''
     amount = ''
 }

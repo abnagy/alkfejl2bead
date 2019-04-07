@@ -1,6 +1,37 @@
-<form [formGroup]="transactionForm">
+{{transaction | json}}
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Title" formControlName="title" required>
+    <!-- <mat-error *ngIf="form.get('title').invalid">Required</mat-error> -->
+    <mat-error *ngIf="title.invalid">Title is required</mat-error>
+  </mat-form-field>
+
   <mat-form-field>
     <input matInput placeholder="Place" formControlName="place">
+    <!-- <mat-error *ngIf="form.get('title').invalid">Required</mat-error> -->
+    <mat-error *ngIf="place.invalid && (place.dirty || place.touched) && place.errors.required">
+      Place is required!
+    </mat-error>
+    <mat-error *ngIf="place.invalid && (place.dirty || place.touched) && place.errors.pattern">
+      Place must start with PC...!
+    </mat-error>
   </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="transaction.id !== null">
+    <mat-select placeholder="Type" formControlName="type" required>
+      <mat-option *ngFor="let type of types" [value]="type">
+        {{type}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button mat-flat-button type="submit" color="primary" [disabled]="transactionForm.invalid">Mentés</button>
+  </div>
+
+  {{transactionForm.value | json}}
 </form>
-{{transactionForm.value | json}}

@@ -3,8 +3,15 @@
     <mat-icon>home</mat-icon>
     Családi büdzsé
   </button>
-  <button mat-button routerLink="/transactions">Tranzakciók</button>
-  <button mat-button routerLink="/transactions/add">Új tranzakciók</button>
+  <div *ngIf="authService.isLoggedIn">
+    <button mat-button routerLink="/transactions">Tranzakciók</button>
+    <button mat-button routerLink="/transactions/add">Új tranzakciók</button>
+    <span>Hello, {{ authService.user.username }}!</span>
+    <button mat-button (click)="logout()">Logout</button>
+  </div>
+  <div *ngIf="!authService.isLoggedIn">
+    <button mat-button routerLink="/login">Login</button>
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

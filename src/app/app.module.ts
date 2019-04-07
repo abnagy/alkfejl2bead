@@ -11,7 +11,8 @@ import {
   MatListModule,
   MatButtonToggleModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatSelectModule
 } from '@angular/material';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -19,7 +20,9 @@ import { RoutingModule } from './routing/routing.module';
 import { TypeFilterComponent } from './type-filter/type-filter.component';
 import { TransactionFormComponent } from './transaction-form/transaction-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { TransactionAddComponent } from './transaction-add/transaction-add.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { TransactionAddComponent } from './transaction-add/transaction-add.compo
     TypeFilterComponent,
     TransactionFormComponent,
     TransactionAddComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import { TransactionAddComponent } from './transaction-add/transaction-add.compo
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
